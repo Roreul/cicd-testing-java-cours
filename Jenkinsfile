@@ -10,7 +10,9 @@ node {
         stage('Initialize') {
             def dockerHome = tool 'DockerLatest'
             def mavenHome = tool 'MavenLatest'
-            env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+            def jdkHome = tool 'JDK11'
+            env.JAVA_HOME = "${jdkHome}"
+            env.PATH = "${jdkHome}/bin:${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
         }
 
         stage('Checkout') {
